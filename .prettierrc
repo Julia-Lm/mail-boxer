@@ -1,0 +1,22 @@
+{
+  "arrowParens": "always",
+  "trailingComma": "all",
+  "printWidth": 110,
+  "proseWrap": "never",
+  "singleQuote": false,
+  "tabWidth": 2,
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.js",
+        "*.tsx",
+        "*.jsx"
+      ],
+      "options": {
+        "trailingComma": "all"
+      },
+      "parser": "babel-ts"
+    }
+  ]
+}

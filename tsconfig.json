@@ -1,0 +1,58 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2022",
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "isolatedModules": false,
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    /* Linting */
+    "experimentalDecorators": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "paths": {
+      "app/*": [
+        "./src/app/*"
+      ],
+      "features/*": [
+        "./src/features/*"
+      ],
+      "pages/*": [
+        "./src/pages/*"
+      ],
+      "shared/*": [
+        "./src/shared/*"
+      ],
+      "entities/*": [
+        "./src/entities/*"
+      ],
+      "widgets/*": [
+        "./src/widgets/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "vite-plugins"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
