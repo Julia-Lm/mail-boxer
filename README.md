@@ -3,7 +3,7 @@
 
 Link to the app:
 
-[](https://)
+[mail-boxer.vercel.app](https://mail-boxer.vercel.app/)
 
 
 ## Installation
@@ -11,7 +11,7 @@ Link to the app:
 Clone the repository:
 
 ```bash
-git clone https://github.com/Julia-Lm/mail-boxer
+git clone https://github.com/Julia-Lm/mail-boxer.git
 ```
 
 Install dependencies:
