@@ -3,15 +3,16 @@ import { colorShades } from "./color-shades.ts";
 export const mainTheme = {
   bodyBackground: colorShades.white,
   text: colorShades.black,
+  errorText: colorShades.red,
   header: {
-    border: colorShades.green,
+    border: colorShades.black,
     link: {
-      color: colorShades.green,
+      color: colorShades.mainBlue,
     },
   },
   spinner: {
     border: colorShades.lightGrey,
-    backgroundColor: colorShades.green,
+    backgroundColor: colorShades.mainBlue,
   },
   loader: {
     backgroundColor: colorShades.lightWhite,

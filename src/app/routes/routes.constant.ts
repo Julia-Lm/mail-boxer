@@ -1,11 +1,11 @@
 export enum ROUTES_KEYS {
-  home = "/",
+  emails = "emails",
 }
 
 export const ROUTES = {
   basePath: "/",
-  home: {
-    key: ROUTES_KEYS.home,
-    url: ROUTES_KEYS.home,
+  emails: {
+    key: ROUTES_KEYS.emails,
+    url: `/${ROUTES_KEYS.emails}`,
   },
 };
