@@ -63,8 +63,6 @@ export class AuthStore {
 
       if (data) this.setLoginAuthData({ username: param.username, password: param.password });
 
-      await this.initUserData();
-
       return { isSuccess: true, message: "User is created successfully." };
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -107,7 +105,6 @@ export class AuthStore {
     try {
       const { data } = await this.getUserInfoRequest();
 
-      console.log(data);
       if (data) {
         this.setUserData(data);
         this.isUserInfoReady = true;

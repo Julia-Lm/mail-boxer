@@ -6,7 +6,7 @@ import * as S from "./sign-up-form.styles";
 import { ChangeEvent, useState } from "react";
 import { checkEmailField } from "./utils.ts";
 
-export const SignUpForm = ({ onCreateUser }: SignUpFormProp) => {
+export const SignUpForm = ({ onCreateUser, onBack }: SignUpFormProp) => {
   const [error, setError] = useState("");
 
   const { handleSubmit, handleChange, values, errors, touched, isSubmitting } = useFormik<AuthData>({
@@ -18,6 +18,8 @@ export const SignUpForm = ({ onCreateUser }: SignUpFormProp) => {
     onSubmit: async (values) => {
       setError("");
       const resp = await onCreateUser(values);
+
+      if(resp.isSuccess) onBack();
 
       if (!resp.isSuccess && resp.message) setError(resp.message);
     },
