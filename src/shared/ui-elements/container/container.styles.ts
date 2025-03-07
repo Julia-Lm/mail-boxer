@@ -7,4 +7,5 @@ export const ContainerWrapper = styled.div`
   height: 100%;
   padding: 0 80px;
   margin: 0 auto;
+  flex: 1;
 `;

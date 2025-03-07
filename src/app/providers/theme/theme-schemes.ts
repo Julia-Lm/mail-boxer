@@ -3,7 +3,7 @@ import { colorShades } from "./color-shades.ts";
 export const mainTheme = {
   bodyBackground: colorShades.white,
   text: colorShades.black,
-  errorText: colorShades.red,
+  errorText: colorShades.red10,
   header: {
     border: colorShades.black,
     link: {

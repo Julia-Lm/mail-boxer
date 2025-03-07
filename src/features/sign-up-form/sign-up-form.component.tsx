@@ -1,10 +1,10 @@
 import { SignUpFormProp } from "./sign-up-form.type.ts";
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { AuthData } from "app/store/auth/auth.type.ts";
 import { useFormik } from "formik";
 import * as S from "./sign-up-form.styles";
 import { ChangeEvent, useState } from "react";
-import { checkEmailField } from "./utils.ts";
+import { validateForm } from "./utils.ts";
 
 export const SignUpForm = ({ onCreateUser, onBack }: SignUpFormProp) => {
   const [error, setError] = useState("");
@@ -19,18 +19,17 @@ export const SignUpForm = ({ onCreateUser, onBack }: SignUpFormProp) => {
       setError("");
       const resp = await onCreateUser(values);
 
-      if(resp.isSuccess) onBack();
+      if (resp.isSuccess) onBack();
 
       if (!resp.isSuccess && resp.message) setError(resp.message);
     },
     validate: (formValues) => {
-      const { username, password, email } = formValues;
-      const emailIsValid = checkEmailField(email);
+      const { username, password, email } = validateForm(formValues);
 
       return {
-        ...(username ? {} : { username: "Please enter login" }),
-        ...(password ? {} : { password: "Please enter password" }),
-        ...(emailIsValid ? {} : { email: "Please enter email" }),
+        ...(username.isValid ? {} : { username: username.message }),
+        ...(password.isValid ? {} : { password: password.message }),
+        ...(email.isValid ? {} : { email: email.message }),
       };
     },
   });
@@ -45,7 +44,7 @@ export const SignUpForm = ({ onCreateUser, onBack }: SignUpFormProp) => {
       <S.FormFields>
         <S.FormGroup>
           <S.FormLabel>Login</S.FormLabel>
-          <TextField
+          <S.Input
             name="username"
             variant="outlined"
             size="small"
@@ -53,13 +52,15 @@ export const SignUpForm = ({ onCreateUser, onBack }: SignUpFormProp) => {
             value={values.username}
             onChange={handleChangeInput}
             error={touched.username && Boolean(errors.username)}
+            helperText={touched.username && errors.username}
             placeholder="Enter login"
+            $isMessage={Boolean(touched.username && Boolean(errors.username))}
           />
         </S.FormGroup>
 
         <S.FormGroup>
           <S.FormLabel>Email</S.FormLabel>
-          <TextField
+          <S.Input
             name="email"
             variant="outlined"
             size="small"
@@ -68,12 +69,14 @@ export const SignUpForm = ({ onCreateUser, onBack }: SignUpFormProp) => {
             onChange={handleChangeInput}
             error={touched.email && Boolean(errors.email)}
             placeholder="Enter email"
+            helperText={touched.email && errors.email}
+            $isMessage={Boolean(touched.email && Boolean(errors.email))}
           />
         </S.FormGroup>
 
         <S.FormGroup>
           <S.FormLabel>Password</S.FormLabel>
-          <TextField
+          <S.Input
             name="password"
             variant="outlined"
             size="small"
@@ -82,6 +85,8 @@ export const SignUpForm = ({ onCreateUser, onBack }: SignUpFormProp) => {
             value={values.password}
             onChange={handleChangeInput}
             error={touched.password && Boolean(errors.password)}
+            helperText={touched.password && errors.password}
+            $isMessage={Boolean(touched.password && Boolean(errors.password))}
           />
         </S.FormGroup>
         <S.ErrorMessage $isHidden={!error}>{error}</S.ErrorMessage>

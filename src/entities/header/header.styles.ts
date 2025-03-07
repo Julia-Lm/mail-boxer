@@ -19,4 +19,3 @@ export const HomeLink = styled(Link)`
   font-size: 2rem;
   color: ${({ theme }) => theme.header.link.color};
 `;
-

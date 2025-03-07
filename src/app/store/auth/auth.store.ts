@@ -5,12 +5,6 @@ import axios from "axios";
 import { AuthData, AuthLoginData, AuthRespData, UserData } from "app/store/auth/auth.type.ts";
 import isEqual from "lodash/isEqual";
 
-// const mockUser = {
-//   username: "user1993", //yuliiaLm1993
-//   password: "password",
-//   email: "user1@gmail.com", //yuliiaLm1993
-// };
-
 export class AuthStore {
   public isAuth: boolean;
   public isUserInfoReady: boolean;
@@ -18,10 +12,13 @@ export class AuthStore {
   private loginAuthData: AuthLoginData | null;
 
   private readonly AxiosApi: AxiosApi;
+  private requestPostfix: string;
 
-  constructor() {
+  constructor(AxiosApi: AxiosApi) {
     makeAutoObservable(this, undefined, { autoBind: true });
-    this.AxiosApi = new AxiosApi();
+    this.AxiosApi = AxiosApi;
+    this.requestPostfix = "/users/";
+
     this.loginAuthData = this.getLoginAuthData();
 
     this.isAuth = Boolean(this.loginAuthData?.password && this.loginAuthData?.username);
@@ -33,7 +30,7 @@ export class AuthStore {
   get user() {
     if (!this.isUserDataReady && this.userData === null) {
       this.getUserInfo();
-      return null;
+      return undefined;
     }
 
     return this.userData;
@@ -97,12 +94,10 @@ export class AuthStore {
     }
   }
 
-  logout() {
-    this.clearStore();
-  }
-
   async getUserInfo() {
     try {
+      if (!this.isAuth) return;
+
       const { data } = await this.getUserInfoRequest();
 
       if (data) {
@@ -131,17 +126,17 @@ export class AuthStore {
   }
 
   private async getUserInfoRequest() {
-    const url = "/users/current/";
+    const url = this.requestPostfix + "current/";
 
     return this.AxiosApi.get<UserData>(url);
   }
 
   private async createUserRequest(newUser: AuthData) {
-    const url = backEndURL + "/users/";
+    const url = backEndURL + this.requestPostfix;
     return await axios.post<any>(url, newUser);
   }
 
-  private clearStore() {
+  clearStore() {
     localStorage.removeItem(authStoreName);
     this.setAuth(false);
     this.isUserInfoReady = false;
@@ -150,5 +145,3 @@ export class AuthStore {
     this.AxiosApi.reset();
   }
 }
-
-export const AuthHub = new AuthStore();

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { TextField } from "@mui/material";
 
 export const Form = styled.form`
   display: flex;
@@ -6,7 +7,7 @@ export const Form = styled.form`
   align-items: center;
   gap: 35px;
   width: 100%;
-  max-width: 250px;
+  max-width: 350px;
 `;
 
 export const FormFields = styled.div`
@@ -38,4 +39,15 @@ export const ErrorMessage = styled("p")<{ $isHidden: boolean }>`
   left: 0;
   visibility: ${({ $isHidden }) => ($isHidden ? "hidden" : "visible")};
   opacity: ${({ $isHidden }) => ($isHidden ? "0" : "1")};
+`;
+
+export const Input = styled(TextField)<{ $isMessage: boolean }>`
+  & .MuiFormHelperText-root.Mui-error,
+  .MuiFormHelperText-root {
+    height: ${({ $isMessage }) => ($isMessage ? "20px" : "0")};
+    opacity: ${({ $isMessage }) => ($isMessage ? "1" : "0")};
+    display: grid;
+    grid-template-rows: ${({ $isMessage }) => ($isMessage ? "1fr" : "1fr")};
+    transition: 0.3s ease;
+  }
 `;

@@ -1,4 +1,3 @@
-import { AuthHub } from "app/store/auth/auth.store.ts";
 import { useState } from "react";
 import { ErrorBoundaryComponent } from "app/providers/global-providers/error-boundary.tsx";
 import { StepName } from "pages/auth-page/auth-page.type.ts";
@@ -7,9 +6,10 @@ import { SignInForm } from "features/sign-in-form";
 import * as S from "./auth-page.styles";
 import { SignUpForm } from "features/sign-up-form";
 import { observer } from "mobx-react-lite";
+import { GlobalHub } from "app/store/global-store/global-store.store.ts";
 
 export const AuthPage = observer(() => {
-  const { createUser, login } = AuthHub;
+  const { createUser, login } = GlobalHub.AuthHub;
   const [steps, setSteps] = useState(StepName.singIn);
 
   const onLogin = async (param: AuthLoginData) => {

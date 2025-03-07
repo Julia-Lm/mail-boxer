@@ -9,5 +9,6 @@ export const colorShades = {
   lightBeige: "#ffe2d4fc",
   lightGrey: "#c6c6c6",
   red: "#d32f2f",
+  red10: "#d32f2f",
   mainBlue: "#1976d2",
 };
